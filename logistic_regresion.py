@@ -258,3 +258,220 @@ for epoch in range(epochs):
     # Want to print the Data Space for the current iteration every 20 epochs
     if epoch % 20 == 0:
         get_surface.plot_ps()
+
+#values of the weight and bias
+w = model.state_dict()['linear.weight'].data[0]
+b = model.state_dict()['linear.bias'].data[0]
+print("w = ", w, "b = ", b)
+
+
+# Getting the predictions
+yhat = model(data_set.x)
+# Rounding the prediction to the nearedt integer 0 or 1 representing the classes
+yhat = torch.round(yhat)
+# Counter to keep track of correct predictions
+correct = 0
+# Goes through each prediction and actual y value
+for prediction, actual in zip(yhat, data_set.y):
+    # Compares if the prediction and actualy y value are the same
+    if (prediction == actual):
+        # Adds to counter if prediction is correct
+        correct+=1
+# Outputs the accuracy by dividing the correct predictions by the length of the dataset
+print("Accuracy: ", correct/len(data_set)*100, "%")
+
+plt.plot(loss_values)
+plt.xlabel("Iteration")
+plt.ylabel("Cost")
+
+#get surface
+get_surface = plot_error_surfaces(15, 13, data_set[:][0], data_set[:][1], 30)
+
+#train the model
+# First we create an instance of the model we want to train
+model = logistic_regression(1)
+# We create a criterion which will measure loss
+criterion = nn.BCELoss()
+# We create a data loader with the dataset and specified batch size of 1
+trainloader = DataLoader(dataset = data_set, batch_size = 1)
+# We create an optimizer with the model parameters and learning rate
+optimizer = torch.optim.SGD(model.parameters(), lr = .01)
+# Then we set the number of epochs which is the total number of times we will train on the entire training dataset
+epochs=100
+# This will store the loss over iterations so we can plot it at the end
+loss_values = []
+
+# Loop will execute for number of epochs
+for epoch in range(epochs):
+    # For each batch in the training data
+    for x, y in trainloader:
+        # Make our predictions from the X values
+        yhat = model(x)
+        # Measure the loss between our prediction and actual Y values
+        loss = criterion(yhat, y)
+        # Resets the calculated gradient value, this must be done each time as it accumulates if we do not reset
+        optimizer.zero_grad()
+        # Calculates the gradient value with respect to each weight and bias
+        loss.backward()
+        # Updates the weight and bias according to calculated gradient value
+        optimizer.step()
+        # Set the parameters for the loss surface contour graphs
+        get_surface.set_para_loss(model, loss.tolist())
+        # Saves the loss of the iteration
+        loss_values.append(loss)
+    # Want to print the Data Space for the current iteration every 20 epochs
+    if epoch % 20 == 0:
+        get_surface.plot_ps()
+
+#weithg and bias
+w = model.state_dict()['linear.weight'].data[0]
+b = model.state_dict()['linear.bias'].data[0]
+print("w = ", w, "b = ", b)
+
+# Getting the predictions
+yhat = model(data_set.x)
+# Rounding the prediction to the nearedt integer 0 or 1 representing the classes
+yhat = torch.round(yhat)
+# Counter to keep track of correct predictions
+correct = 0
+# Goes through each prediction and actual y value
+for prediction, actual in zip(yhat, data_set.y):
+    # Compares if the prediction and actualy y value are the same
+    if (prediction == actual):
+        # Adds to counter if prediction is correct
+        correct+=1
+# Outputs the accuracy by dividing the correct predictions by the length of the dataset
+print("Accuracy: ", correct/len(data_set)*100, "%")
+
+#plot the cost and iteration graph
+plt.plot(loss_values)
+plt.xlabel("Iteration")
+plt.ylabel("Cost")
+
+# high learning rate
+
+get_surface = plot_error_surfaces(15, 13, data_set[:][0], data_set[:][1], 30)
+
+#train the model
+
+# First we create an instance of the model we want to train
+model = logistic_regression(1)
+# We create a criterion that will measure loss
+criterion = nn.BCELoss()
+# We create a data loader with the dataset and specified batch size of 1
+trainloader = DataLoader(dataset = data_set, batch_size = 1)
+# We create an optimizer with the model parameters and learning rate
+optimizer = torch.optim.SGD(model.parameters(), lr = 1)
+# Then we set the number of epochs which is the total number of times we will train on the entire training dataset
+epochs=100
+# This will store the loss over iterations so we can plot it at the end
+loss_values = []
+
+# Loop will execute for number of epochs
+for epoch in range(epochs):
+    # For each batch in the training data
+    for x, y in trainloader:
+        # Make our predictions from the X values
+        yhat = model(x)
+        # Measure the loss between our prediction and actual Y values
+        loss = criterion(yhat, y)
+        # Resets the calculated gradient value, this must be done each time as it accumulates if we do not reset
+        optimizer.zero_grad()
+        # Calculates the gradient value with respect to each weight and bias
+        loss.backward()
+        # Updates the weight and bias according to calculated gradient value
+        optimizer.step()
+        # Set the parameters for the loss surface contour graphs
+        get_surface.set_para_loss(model, loss.tolist())
+        # Saves the loss of the iteration
+        loss_values.append(loss)
+    # Want to print the Data Space for the current iteration every 20 epochs
+    if epoch % 20 == 0:
+        get_surface.plot_ps()
+
+#weight and bias
+
+w = model.state_dict()['linear.weight'].data[0]
+b = model.state_dict()['linear.bias'].data[0]
+print("w = ", w, "b = ", b)
+# Getting the predictions
+yhat = model(data_set.x)
+# Rounding the prediction to the nearedt integer 0 or 1 representing the classes
+yhat = torch.round(yhat)
+# Counter to keep track of correct predictions
+correct = 0
+# Goes through each prediction and actual y value
+for prediction, actual in zip(yhat, data_set.y):
+    # Compares if the prediction and actualy y value are the same
+    if (prediction == actual):
+        # Adds to counter if prediction is correct
+        correct+=1
+# Outputs the accuracy by dividing the correct predictions by the length of the dataset
+print("Accuracy: ", correct/len(data_set)*100, "%")
+
+plt.plot(loss_values)
+plt.xlabel("Iteration")
+plt.ylabel("Cost")
+
+
+#question
+
+get_surface = plot_error_surfaces(15, 13, data_set[:][0], data_set[:][1], 30)
+
+# First we create an instance of the model we want to train
+model = logistic_regression(1)
+# We create a criterion which will measure loss
+criterion = nn.BCELoss()
+# We create a data loader with the dataset and specified batch size of 1
+trainloader = DataLoader(dataset = data_set, batch_size = "SET_BATCH_SIZE")
+# We create an optimizer with the model parameters and learning rate
+optimizer = torch.optim.SGD(model.parameters(), lr = "SET_LEARNING_RATE")
+# Then we set the number of epochs which is the total number of times we will train on the entire training dataset
+epochs= "SET_NUMBER_OF_EPOCHS"
+# This will store the loss over iterations so we can plot it at the end
+loss_values = []
+
+# Loop will execute for number of epochs
+for epoch in range(epochs):
+    # For each batch in the training data
+    for x, y in trainloader:
+        # Make our predictions from the X values
+        yhat = model(x)
+        # Measure the loss between our prediction and actual Y values
+        loss = criterion(yhat, y)
+        # Resets the calculated gradient value, this must be done each time as it accumulates if we do not reset
+        optimizer.zero_grad()
+        # Calculates the gradient value with respect to each weight and bias
+        loss.backward()
+        # Updates the weight and bias according to calculated gradient value
+        optimizer.step()
+        # Set the parameters for the loss surface contour graphs
+        get_surface.set_para_loss(model, loss.tolist())
+        # Saves the loss of the iteration
+        loss_values.append(loss)
+    # Want to print the Data Space for the current iteration every 20 epochs
+    if epoch % 20 == 0:
+        get_surface.plot_ps()
+
+w = model.state_dict()['linear.weight'].data[0]
+b = model.state_dict()['linear.bias'].data[0]
+print("w = ", w, "b = ", b)
+
+# Getting the predictions
+yhat = model(data_set.x)
+# Rounding the prediction to the nearedt integer 0 or 1 representing the classes
+yhat = torch.round(yhat)
+# Counter to keep track of correct predictions
+correct = 0
+# Goes through each prediction and actual y value
+for prediction, actual in zip(yhat, data_set.y):
+    # Compares if the prediction and actualy y value are the same
+    if (prediction == actual):
+        # Adds to counter if prediction is correct
+        correct+=1
+# Outputs the accuracy by dividing the correct predictions by the length of the dataset
+print("Accuracy: ", correct/len(data_set)*100, "%")
+
+plt.plot(loss_values)
+plt.xlabel("Iteration")
+plt.ylabel("Cost")
