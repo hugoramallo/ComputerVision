@@ -163,7 +163,6 @@ optimizer = torch.optim.SGD(modelRelu.parameters(), lr=learning_rate)
 training_results_relu = train(modelRelu, criterion, train_loader, validation_loader, optimizer, epochs=cust_epochs)
 
 # Compare the training loss
-
 plt.plot(training_results['training_loss'], label='sigmoid')
 plt.plot(training_results_relu['training_loss'], label='relu')
 plt.ylabel('loss')
@@ -172,7 +171,6 @@ plt.legend()
 
 
 # Compare the validation loss
-
 plt.plot(training_results['validation_accuracy'], label = 'sigmoid')
 plt.plot(training_results_relu['validation_accuracy'], label = 'relu')
 plt.ylabel('validation accuracy')
